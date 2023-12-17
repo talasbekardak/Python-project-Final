@@ -1,0 +1,37 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Detail{% endblock %}
+
+{% block body_block %}
+
+    <div class="card border-info mb-3" style="max-width: 30rem; margin: 100px auto">
+        <div class="card-header">About</div>
+        <div class="card-body text-info">
+            <h3 class="card-title">{{ book.title.upper }}</h3>
+            <p class="card-text">${{ book.price }}</p>
+            <p class="card-text">{{ book.publisher }}</p>
+        </div>
+    </div>
+
+    <!-- Отображение отзывов -->
+    <div class="reviews-section" style="margin-top: 50px;">
+        <h4>Reviews</h4>
+        <hr style="margin-bottom: 20px;">
+        {% if avg_rating != -1 %}
+            <h5>Average rating: {{ avg_rating }}</h5>
+            <ul class="list-group">
+                {% for review in reviews %}
+                    <li class="list-group-item">
+                        <div>
+                            <strong>User: {{ review.reviewer }}</strong><br>
+                            <strong>Rating: {{ review.rating }}</strong><br>
+                            <em>{{ review.comments }}</em>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h5>No reviews for this book yet.</h5>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'myapp/base.html' %}
+{% block title %}Register{% endblock %}
+{% block myhdg %}{% endblock %}
+{% block body_block %}
+    <div class="register-form">
+        <form action="{% url 'myapp:register' %}" method="post" enctype="multipart/form-data" class="form-group">
+            {% csrf_token %}
+
+            <label for="id_username">Username:</label>
+            <input type="text" name="username" id="id_username">
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="id_password1">Password:</label>
+                    <input type="password" name="password1" id="id_password1">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="id_password2">Confirm Password:</label>
+                    <input type="password" name="password2" id="id_password2">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="id_first_name">First Name:</label>
+                    <input type="text" name="first_name" id="id_first_name">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="id_last_name">Last Name:</label>
+                    <input type="text" name="last_name" id="id_last_name">
+                </div>
+            </div>
+
+            <label for="id_status">Status:</label>
+            <select name="status" id="id_status">
+                <option value="1">Regular member</option>
+                <option value="2">Premium Member</option>
+                <option value="3">Guest Member</option>
+            </select>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="id_address">Address:</label>
+                    <input type="text" name="address" id="id_address">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="id_city">City:</label>
+                    <input type="text" name="city" id="id_city">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="id_province">Province:</label>
+                    <input type="text" name="province" id="id_province">
+                </div>
+            </div>
+
+            <label for="id_profile_image">Profile Image:</label>
+            <input type="file" name="profile_image" id="id_profile_image">
+
+            <label for="id_auto_renew">Auto Renew:</label>
+            <input type="checkbox" name="auto_renew" id="id_auto_renew">
+
+            <input type="submit" name="submit1" class="btn btn-success register-submit" value="Submit"/>
+        </form>
+    </div>
+{% endblock %}

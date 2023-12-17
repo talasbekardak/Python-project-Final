@@ -1,0 +1,52 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Review{% endblock %}
+
+{% block body_block %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-header">
+                        <h3 class="card-title text-center">Review Form</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="{% url 'myapp:review' %}" class="needs-validation" novalidate>
+                            {% csrf_token %}
+
+                            <div class="form-group">
+                                <label for="{{ form.reviewer.id_for_label }}">Please enter a valid email:</label>
+                                <input type="text" class="form-control" id="{{ form.reviewer.id_for_label }}" name="{{ form.reviewer.html_name }}" value="{{ form.reviewer.value }}">
+                                {{ form.reviewer.errors }}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="{{ form.book.id_for_label }}">Book:</label>
+                                <select class="form-control" id="{{ form.book.id_for_label }}" name="{{ form.book.html_name }}">
+                                    {% for book_choice in form.book.field.choices %}
+                                        <option value="{{ book_choice.0 }}" {% if form.book.value == book_choice.0 %} selected {% endif %}>{{ book_choice.1 }}</option>
+                                    {% endfor %}
+                                </select>
+                                {{ form.book.errors }}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="{{ form.rating.id_for_label }}">Rating (1-5):</label>
+                                <input type="number" class="form-control" id="{{ form.rating.id_for_label }}" name="{{ form.rating.html_name }}" value="{{ form.rating.value }}">
+                                {{ form.rating.errors }}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="{{ form.comments.id_for_label }}">Comments:</label>
+                                <textarea class="form-control" id="{{ form.comments.id_for_label }}" name="{{ form.comments.html_name }}">{{ form.comments.value }}</textarea>
+                                {{ form.comments.errors }}
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

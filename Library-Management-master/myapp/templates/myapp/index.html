@@ -1,0 +1,26 @@
+{% extends 'myapp/base.html' %}
+
+{% block body_block %}
+    {% if last_login %}
+        <p class="login-status">( Last login was {{ last_login }} )</p>
+    {% else %}
+        <p class="login-status">( Your last login was more than one hour ago )</p>
+    {% endif %}
+
+    <div class="body-content text-center">
+        {% if booklist %}
+            <div class="list-group">
+                {% for book in booklist %}
+                    <a href="{% url 'myapp:detail' book.id %}" class="list-group-item list-group-item-action">{{ book.title }}</a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <strong>There are no available books!</strong>
+        {% endif %}
+
+        <br><br>
+        <a class="btn btn-info" href="{% url 'myapp:place_order' %}">Place order</a>
+        <a class="btn btn-warning" href="{% url 'myapp:review' %}">Review book</a>
+        <a class="btn btn-secondary" href="{% url 'myapp:orders' %}">Orders</a>
+    </div>
+{% endblock %}

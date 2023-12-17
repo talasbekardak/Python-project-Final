@@ -1,0 +1,29 @@
+{% extends 'myapp/base.html' %}
+{% block title %}Find Books{% endblock %}
+
+{% block body_block %}
+    <div class="register-form">
+        <form action="{% url 'myapp:findbooks' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn btn-success register-submit" value="Search"/>
+        </form>
+    </div>
+
+    {% if booklist %}
+        <div class="search-results">
+            <h2>Search Results</h2>
+            {% if name %}
+                <p><strong>Your Name:</strong> {{ name }}</p>
+            {% endif %}
+            {% if category %}
+                <p><strong>Category:</strong> {{ category }}</p>
+            {% endif %}
+            <ul>
+                {% for book in booklist %}
+                    <li>{{ book.title }} - {{ book.category }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}

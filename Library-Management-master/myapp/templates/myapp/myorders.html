@@ -1,0 +1,39 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Orders{% endblock %}
+
+{% block body_block %}
+    <div class="register-form" style="margin-top: 100px;">
+        {% if orders %}
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Books</th>
+                    <th scope="col">Order Type</th>
+                    <th scope="col">Order Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for order, book in new_list %}
+                    <tr>
+                        <td>{{ book }}</td>
+
+                        <td>
+                            {% if order.order_type == 0 %}
+                                Purchase
+                            {% else %}
+                                Borrow
+                            {% endif %}
+                        </td>
+                        <td>{{ order.order_date }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <strong>There are no available orders!</strong>
+        {% endif %}
+    </div>
+
+{% endblock %}
